@@ -1,5 +1,27 @@
 .main-container {
-    width: 1000px;
+    max-width: 1000px;
     margin: 0 auto;
+    background-color: #e5e5ee;
 }
 
+.header_h1 {
+    text-align: center;
+    margin: 0;
+    color: darkblue;
+}
+
+.header_center {
+    text-align: center;
+}
+
+.header_menu {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_left, .header_right {
+    margin-right: 30px;
+    margin-left: 30px;
+}

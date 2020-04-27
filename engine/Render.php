@@ -3,6 +3,9 @@
 
 namespace app\engine;
 
+use app\models\Users;
+use app\engine\VarDump;
+
 
 /**
  * Класс рендерит страницу
@@ -41,7 +44,11 @@ class Render
     public function renderPage($template, $params = []) {
         return $this->renderTemplate(
             $this->layout,
-            ['content' => $this->renderTemplate($template, $params)]
+            [
+                'content' => $this->renderTemplate($template, $params),
+                'auth' => Users::is_auth(), //аутентифицирован ли пользователь
+                'login' => Users::getLogin(), //логин пользователя
+            ]
         );
     }
 }

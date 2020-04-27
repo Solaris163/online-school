@@ -5,6 +5,8 @@ namespace app\controllers;
 
 
 use app\engine\Render;
+use app\models\Users;
+use app\engine\VarDump;
 
 /**
  * Класс отвечает за отображение страниц сайта
@@ -31,7 +33,8 @@ class ShowController extends Controller
      */
     public function actionIndex(){
         $content = 'Экшен индекс';
-        echo $this->render->renderPage('index.php', ['content' => $content]); //отобразим страницу
+        //отобразим страницу
+        echo $this->render->renderPage('index.php', ['content' => $content,] );
     }
 
 }
