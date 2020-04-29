@@ -25,7 +25,8 @@ class ShowController extends Controller
      */
     public function __construct()
     {
-        $this->render = new Render(); //создадим экземпляр класса Render для рендеринга страниц
+        parent::__construct();
+        $this->render = new Render($this->auth, $this->login, $this->is_admin); //создадим экземпляр класса Render для рендеринга страниц
     }
 
     /**
@@ -34,7 +35,7 @@ class ShowController extends Controller
     public function actionIndex(){
         $content = 'Экшен индекс';
         //отобразим страницу
-        echo $this->render->renderPage('index.php', ['content' => $content,] );
+        echo $this->render->renderPage('index.php', ['content' => $content]);
     }
 
 }

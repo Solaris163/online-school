@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use app\models\Users;
 
 /**
  * Class Controller
@@ -17,6 +18,14 @@ class Controller
      * @var string
      */
     private $defaultAction = "index";
+
+    public $auth; //аутентифицирован ли пользователь
+    public $login; //логин пользователя
+
+    public function __construct(){
+        $this->auth = Users::isAuth();
+        $this->login = Users::getLogin();
+    }
 
     /**
      * Метод выбирает какой action запустить

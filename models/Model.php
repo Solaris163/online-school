@@ -4,7 +4,7 @@ namespace app\models;
 use app\engine\Db;
 use app\engine\VarDump;
 
-abstract class DbModel
+abstract class Model
 {
     public static function getOne($id) { //возвращает объект по id
         $tableName = static::getTableName();

@@ -19,6 +19,17 @@ class Render
      */
     public $layout = 'layout.php';
 
+    public $auth; //аутентифицирован ли пользователь
+    public $login; //логин пользователя
+    public $is_admin; //является ли пользователь администратором
+
+    public function __construct($auth = null, $login = null, $is_admin = null){
+        $this->auth = $auth;
+        $this->login = $login;
+        $this->is_admin = $is_admin;
+    }
+
+
     /**
      * Метод рендерит шаблон
      * @param string $template Шаблон страницы
@@ -46,8 +57,9 @@ class Render
             $this->layout,
             [
                 'content' => $this->renderTemplate($template, $params),
-                'auth' => Users::is_auth(), //аутентифицирован ли пользователь
-                'login' => Users::getLogin(), //логин пользователя
+                'auth' => $this->auth, //аутентифицирован ли пользователь
+                'login' => $this->login, //логин пользователя
+                'is_admin' => $this->is_admin, //является ли пользователь админом
             ]
         );
     }

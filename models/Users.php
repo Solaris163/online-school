@@ -6,17 +6,20 @@ use app\engine\Db;
 use app\engine\VarDump;
 
 
-class Users extends DbModel
+/**
+ * Класс отвечает за работу с таблицей users базы данных и обработку данных из этой таблицы
+ * Class Users
+ * @package app\models
+ */
+class Users extends Model
 {
     public $id;
     public $login;
     public $pass;
     public $hash;
-    public $user_key;
     public $email;
     public $name;
     public $surname;
-    public $pseudonym;
     public $page_vk;
     public $create_date;
     public $change_date;
@@ -28,11 +31,9 @@ class Users extends DbModel
         $login = null,
         $pass = null,
         $hash = null,
-        $user_key = null,
         $email = null,
         $name = null,
         $surname = null,
-        $pseudonym = null,
         $page_vk = null,
         $create_date = null,
         $change_date = null,
@@ -43,7 +44,6 @@ class Users extends DbModel
         $this->login = $login;
         $this->pass = $pass;
         $this->hash = $hash;
-        $this->user_key = $user_key;
         $this->email = $email;
         $this->name = $name;
         $this->surname = $surname;
@@ -51,7 +51,6 @@ class Users extends DbModel
         $this->create_date = $create_date;
         $this->change_date = $change_date;
         $this->is_delete = $is_delete;
-        $this->hash = $hash;
         $this->description = $description;
     }
 
@@ -65,11 +64,9 @@ class Users extends DbModel
             'login'=>$this->login,
             'pass'=>$this->pass,
             'hash'=>$this->hash,
-            'user_key'=>$this->user_key,
             'email'=>$this->email,
             'name'=>$this->name,
             'surname'=>$this->surname,
-            'pseudonym'=>$this->pseudonym,
             'page_vk'=>$this->page_vk,
             'create_date'=>$this->create_date,
             'change_date'=>$this->change_date,
@@ -78,7 +75,7 @@ class Users extends DbModel
         ];
     }
 
-    public static function is_auth() { //функция проверяет есть ли пользователь в сессии если есть возвращает true,
+    public static function isAuth() { //функция проверяет есть ли пользователь в сессии если есть возвращает true,
         //если нет, проверяет есть ли хеш в cookie, если есть то записывает пользователя в сессию
         if(isset($_SESSION['login'])) { //проверяем, есть ли в сессии логин пользователя
             return true;
@@ -93,7 +90,9 @@ class Users extends DbModel
     }
 
     public static function getLogin() {
+        //return 'fdsdd';
         return $_SESSION['login'];
     }
+
 
 }

@@ -4,6 +4,11 @@ namespace app\controllers;
 
 use app\models\Users;
 
+/**
+ * Class UserController
+ * @package app\controllers
+ * Класс выполняет авторизацию пользователя
+ */
 class UserController extends Controller
 {
     public function actionLogin() { //функция проверяет был ли послан запрос на авторизацию и делает аутентификацию пользователя
