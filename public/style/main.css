@@ -25,3 +25,18 @@
     margin-right: 30px;
     margin-left: 30px;
 }
+
+.user-form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.user-form .text {
+    height: 30px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.user-form .checkbox {
+    margin-bottom: 20px;
+}

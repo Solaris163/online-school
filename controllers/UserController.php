@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\engine\Render;
 use app\models\Users;
 
 /**
@@ -11,6 +12,20 @@ use app\models\Users;
  */
 class UserController extends Controller
 {
+    /**
+     * @var Render
+     */
+    public $render;
+
+    /**
+     * UserController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->render = new Render(); //создадим экземпляр класса Render для рендеринга страниц
+    }
+
     public function actionLogin() { //функция проверяет был ли послан запрос на авторизацию и делает аутентификацию пользователя
         if (isset($_POST['send'])) {
             $login = $_POST['login'];
@@ -35,6 +50,20 @@ class UserController extends Controller
         unset($_SESSION['login']);
         setcookie("hash", null, -1, "/");
         header("Location: /");
+    }
+
+    /**
+     * Метод показывает страницу с формой для авторизации
+     */
+    public function actionLoginForm(){
+        echo $this->render->renderPage('loginForm.php', []);
+    }
+
+    /**
+     * Метод показывает страницу с формой для регистрации
+     */
+    public function actionRegistrationForm(){
+        echo $this->render->renderPage('registrationForm.php', []);
     }
 
 }

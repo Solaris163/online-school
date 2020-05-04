@@ -16,16 +16,15 @@
             <div class="header_right">
                 <?php if ($auth): //проверка аутентификации пользователя ?>
                     <form action="/user/logout/">
-                        Добро пожаловать <?=$login?>
+                        Добро пожаловать <?=$login?>&nbsp &nbsp
+                        <?php if ($is_admin):?>
+                            <a href="/adminPanel">Панель администратора</a>&nbsp &nbsp
+                        <?php endif; ?>
                         <input type="submit" name="send" value="Выйти">
                     </form>
                 <?php else: ?>
-                    <form action="/user/login/" method="post">
-                        <input type="text" name='login' placeholder="Введите login">
-                        <input type="text" name='pass' placeholder="Введите пароль">
-                        <input type='checkbox' name='save'> Запомнить?
-                        <input type="submit" name="send" value="Войти">
-                    </form>
+                    <a href="/user/loginForm">Вход</a>&nbsp &nbsp
+                    <a href="/user/registrationForm">Регистрация</a>
                 <?php endif; ?>
             </div>
         </div>

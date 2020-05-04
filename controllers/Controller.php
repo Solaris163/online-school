@@ -21,10 +21,12 @@ class Controller
 
     public $auth; //аутентифицирован ли пользователь
     public $login; //логин пользователя
+    public $is_admin; //является ли пользователь администратором
 
     public function __construct(){
         $this->auth = Users::isAuth();
         $this->login = Users::getLogin();
+        $this->is_admin = Users::isAdmin();
     }
 
     /**

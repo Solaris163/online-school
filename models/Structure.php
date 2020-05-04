@@ -51,24 +51,4 @@ class Structure extends Model
         ];
     }
 
-    /**
-     * Метод проверяет, является ли пользователь администратором
-     * @param string $login Логин пользователя
-     * @return boolean
-     */
-    public static function isAdmin($login) {
-        $user_groups_arr = [];//массив с id групп, в которые входит пользователь
-
-        $sql = "SELECT * FROM users
-        LEFT JOIN structure ON users.id = structure.user_id
-        WHERE users.login = '{$login}';";
-
-        //$sql = "SELECT * FROM users WHERE login = '{$login}';";
-
-        $result = Db::getInstance()->queryAll($sql);
-        VarDump::vardump($result);
-
-        return ;
-    }
-
 }

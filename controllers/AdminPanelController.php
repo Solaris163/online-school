@@ -28,7 +28,6 @@ class AdminPanelController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->is_admin = Structure::isAdmin($this->login);
         $this->render = new Render($this->auth, $this->login, $this->is_admin); //создадим экземпляр класса Render для рендеринга страниц
     }
 
@@ -38,13 +37,13 @@ class AdminPanelController extends Controller
     public function actionIndex(){
         $content = 'Экшен индекс админ-панели';
         //отобразим страницу
-        echo $this->render->renderPage('admin-panel.php', ['content' => $content]);
+        echo $this->render->renderPage('admin-panel.php', ['content' => $content, 'is_admin' => $this->is_admin]);
     }
 
     public function actionTest(){
         $content = 'экшен тест';
         //отобразим страницу
-        echo $this->render->renderPage('admin-panel.php', ['content' => $content]);
+        echo $this->render->renderPage('admin-panel.php', ['content' => $content, 'is_admin' => $this->is_admin]);
     }
 
 
