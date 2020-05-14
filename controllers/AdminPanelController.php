@@ -20,7 +20,6 @@ class AdminPanelController extends Controller
      * @var Render
      */
     public $render;
-    public $is_admin; //является ли пользователь администратором
 
     /**
      * AdminPanelController constructor.
@@ -34,17 +33,33 @@ class AdminPanelController extends Controller
     /**
      * Метод показывает главную страницу админ-панели
      */
-    public function actionIndex(){
+    public function actionIndex() {
         $content = 'Экшен индекс админ-панели';
         //отобразим страницу
         echo $this->render->renderPage('admin-panel.php', ['content' => $content, 'is_admin' => $this->is_admin]);
     }
 
-    public function actionTest(){
+    public function actionTest() {
         $content = 'экшен тест';
         //отобразим страницу
         echo $this->render->renderPage('admin-panel.php', ['content' => $content, 'is_admin' => $this->is_admin]);
     }
 
-
+    /**
+     * Метод выводит список пользователей
+     */
+    public function actionUserList($params) {
+        if ($this->is_admin) {
+            //нужно создать шаблон для рендера таблицы из массива
+            $count = 20; //захардкодил тут пока
+            $page = 0;
+            if (!empty($params)){ //проверяем были ли переданы в запросе гет-параметры
+                $count = (int) $params["count"]; //количество пользователей на странице
+                $page = (int) $params["page"]; //страница, с которой нужно начать вывод
+            }
+            $content = Users::getUsersList($count, $page);
+        }else $content = 'Эта информация только для администраторов';
+        //отобразим страницу
+    echo $this->render->renderPage('admin-panel.php', ['content' => $content, 'is_admin' => $this->is_admin]);
+    }
 }

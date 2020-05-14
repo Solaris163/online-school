@@ -105,7 +105,7 @@ class Users extends Model
         }else return false;
     }
 
-    public static function isAdmin(){
+    public static function isAdmin() {
         return $_SESSION['is_admin'];
     }
 
@@ -113,5 +113,27 @@ class Users extends Model
         return $_SESSION['login'];
     }
 
-
+    /**
+     * Метод находит в базе и отдает список пользователей с группами, в которые они входят
+     * @param int $count число пользователей на одной странице
+     * @param int $page номер страницы, с которой начать показ
+     */
+    public static function getUsersList($count = 20, $page = 0){
+        //Найдем фамилии нужных пользователей (за один запрос не получилось, при добавдении LIMIT в подзапрос, результат теряется)
+        $rowStart = $count*$page; //строка с которой следует начать вывод
+        $sql = "SELECT id, surname FROM users ORDER BY surname LIMIT {$rowStart} , {$count};";
+        $usersArr = Db::getInstance()->queryAll($sql);
+        //Получим строку с id пользователей 
+        $str = '';
+        foreach ($usersArr as $user) {
+            $str .= ',' . $user['id'];
+        }
+        $str = mb_substr($str, 1); //обрежем первую запятую
+        $sql = "SELECT users.login as login, users.name as user_name, users.surname, groups.id as group_id, groups.name as group_name FROM users
+            LEFT JOIN structure ON users.id = structure.user_id
+            LEFT JOIN groups ON structure.group_id = groups.id
+            WHERE users.id IN ({$str}) ORDER BY users.surname;";
+        $resultArr = Db::getInstance()->queryAll($sql);
+        VarDump::varDump($resultArr);
+    }
 }
